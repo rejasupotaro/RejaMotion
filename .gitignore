@@ -1,0 +1,40 @@
+*.orig
+*~
+\#*#
+
+# gitignore for android
+## built application files
+*.apk
+*.ap_
+
+## files for the dex VM
+*.dex
+
+## Java class files
+*.class
+
+## generated files
+bin/
+gen/
+
+## Local configuration file (sdk path, etc)
+local.properties
+
+# gitignore for rails
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+.rvmrc
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+/db/*.sqlite3
+/public/system/*
+/coverage/
+/spec/tmp/*
+rerun.txt
+pickle-email-*.html
+database.yml
