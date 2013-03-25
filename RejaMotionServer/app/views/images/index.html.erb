@@ -19,36 +19,18 @@
 <div class="content">
   <div class="container">
     <ul class="thumbnails">
+      <% @image_list.each do |image| %>
       <li class="span4">
       <div class="thumbnail">
-        <img src="<%= @image_url %>">
+        <img src="<%= image.url %>">
         <div class="caption">
-          <h3><%= @image_title %></h3>
+          <h3><%= image.title %></h3>
           <p><%= @image_text %></p>
           <p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn">Action</a></p>
         </div>
       </div>
       </li>
-      <li class="span4">
-      <div class="thumbnail">
-        <img src="<%= @image_url %>">
-        <div class="caption">
-          <h3>Spabukuro</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn">Action</a></p>
-        </div>
-      </div>
-      </li>
-      <li class="span4">
-      <div class="thumbnail">
-        <img src="http://rejamotion.com/images/gifs/2.gif">
-        <div class="caption">
-          <h3>Rainbow Ocean City</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn">Action</a></p>
-        </div>
-      </div>
-      </li>
+      <% end %>
     </ul>
   </div>
 </div>
