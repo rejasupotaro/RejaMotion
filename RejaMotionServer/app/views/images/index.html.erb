@@ -1,31 +1,10 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="./">RejaMotion</a>
-      <div class="nav-collapse collapse">
-        <ul class="nav">
-          <li class="">
-          <a href="http://takiguchi0817.github.com/">blog</a>
-          </li>
-          <li class="">
-          <a href="http://rejasupotaro.com">music</a>
-          </li>
-          <li class="">
-          <a href="./">about me</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="content">
   <div class="container">
     <ul class="thumbnails">
       <% @image_list.each do |image| %>
       <li class="span4">
       <div class="thumbnail">
-        <img src="<%= image.url %>">
+        <%= link_to image_tag(image.url), :controller => 'images', :action => 'show', :id => image.id %>
         <div class="caption">
           <h3><%= image.title %></h3>
           <p><%= @image_text %></p>
@@ -36,5 +15,3 @@
     </ul>
   </div>
 </div>
-
-<%= @debug %>
