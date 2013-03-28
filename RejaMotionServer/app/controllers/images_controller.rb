@@ -12,9 +12,12 @@ class ImagesController < ApplicationController
 
   def show
     @image = Image.where("id = ?", params[:id]).first
-    @image_text = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit."
-
-    render 'images/show'
+    if @image.nil?
+      render 'images/notfound' if @image.nil?
+    elsif
+      @image_text = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit."
+      render 'images/show'
+    end
   end
 
   def upload

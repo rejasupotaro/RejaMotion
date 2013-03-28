@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  title: "Dummy Title 1"
+  url: "Dummy Url"
+
+two:
+  id: 2
+  title: "Dummy Title 2"
+  url: "Dummy Url"
