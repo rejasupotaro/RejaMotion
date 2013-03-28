@@ -30,7 +30,7 @@ describe ImagesController do
         expect(response).to be_success
       end
       it "renders the show templage" do
-        response.should render_template("show")
+        expect(response).to render_template("show")
       end
     end
 
@@ -39,7 +39,7 @@ describe ImagesController do
         get :show, :id => 9999
       end
       it "renders the notfound template" do
-        response.should render_template("notfound")
+        expect(response) render_template("notfound")
       end
     end
   end
