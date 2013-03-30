@@ -27,7 +27,7 @@ import com.google.inject.Inject;
 import com.rejasupotaro.rejamotionapp.Constants;
 import com.rejasupotaro.rejamotionapp.JavaScriptInterface;
 import com.rejasupotaro.rejamotionapp.R;
-import com.rejasupotaro.rejamotionapp.ui.helper.DailyMotionActivityHelper;
+import com.rejasupotaro.rejamotionapp.ui.helper.RejaMotionActivityHelper;
 import com.rejasupotaro.rejamotionapp.utils.ToastUtils;
 import com.rejasupotaro.rejamotionapp.utils.UriUtils;
 
@@ -35,15 +35,9 @@ import com.rejasupotaro.rejamotionapp.utils.UriUtils;
 public class TimelineActivity extends RoboActivity {
     private static final String TAG = TimelineActivity.class.getSimpleName();
 
-    @InjectView(R.id.webview_timeline)
-    private WebView mWebView;
-
-    @InjectView(R.id.progress_loading)
-    private ProgressBar mProgressLoading;
-
-    @Inject
-    private DailyMotionActivityHelper mActivityHelper;
-
+    @InjectView(R.id.webview_timeline) private WebView mWebView;
+    @InjectView(R.id.progress_loading) private ProgressBar mProgressLoading;
+    @Inject private RejaMotionActivityHelper mActivityHelper;
     private JavaScriptInterface mJavaScriptInterface;
 
     private JavaScriptInterface.Receiver mJavaScriptInterfaceReceiver = new JavaScriptInterface.Receiver() {

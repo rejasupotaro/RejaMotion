@@ -7,8 +7,7 @@ import com.google.inject.Inject;
 
 public class AbstractActivityHelper {
 
-    @Inject
-    private Context mContext;
+    @Inject private Context mContext;
 
     protected Activity getActivity() {
         return (Activity) mContext;

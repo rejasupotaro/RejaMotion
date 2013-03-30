@@ -45,9 +45,9 @@ import com.rejasupotaro.rejamotionapp.Constants;
 import com.rejasupotaro.rejamotionapp.model.AnimationEntity;
 import com.rejasupotaro.rejamotionapp.utils.CloseableUtils;
 
-public class DailyMotionApiClient extends AsyncTaskLoader<Boolean> {
+public class RejaMotionApiClient extends AsyncTaskLoader<Boolean> {
 
-    private static final String TAG = DailyMotionApiClient.class.getSimpleName();
+    private static final String TAG = RejaMotionApiClient.class.getSimpleName();
     public static final String UPLOAD_IMAGE_TITLE = "image_title";
     public static final String UPLOAD_FILE_CONTENT = "content";
     public static final String UPLOAD_ANIMATION_DELAY = "delay";
@@ -65,12 +65,12 @@ public class DailyMotionApiClient extends AsyncTaskLoader<Boolean> {
     private String mResponseMessage;
     private Boolean mResult; // http://www.docjar.org/html/api/org/apache/commons/httpclient/TestStatusLine.java.html
 
-    public DailyMotionApiClient(Context context) {
+    public RejaMotionApiClient(Context context) {
         super(context);
         mHttpClient = new DefaultHttpClient();
     }
 
-    public DailyMotionApiClient(Context context, AnimationEntity animationEntity) {
+    public RejaMotionApiClient(Context context, AnimationEntity animationEntity) {
         super(context);
 
         if (context == null || animationEntity == null) {
@@ -82,7 +82,7 @@ public class DailyMotionApiClient extends AsyncTaskLoader<Boolean> {
         mHttpClient = new DefaultHttpClient();
     }
 
-    public DailyMotionApiClient(Context context, HttpClient httpClient) {
+    public RejaMotionApiClient(Context context, HttpClient httpClient) {
         super(context);
         mHttpClient = httpClient;
     }

@@ -18,9 +18,9 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.google.inject.Inject;
 import com.rejasupotaro.rejamotionapp.R;
-import com.rejasupotaro.rejamotionapp.api.DailyMotionApiClient;
+import com.rejasupotaro.rejamotionapp.api.RejaMotionApiClient;
 import com.rejasupotaro.rejamotionapp.model.AnimationEntity;
-import com.rejasupotaro.rejamotionapp.ui.helper.DailyMotionActivityHelper;
+import com.rejasupotaro.rejamotionapp.ui.helper.RejaMotionActivityHelper;
 import com.rejasupotaro.rejamotionapp.utils.ToastUtils;
 
 @ContentView(R.layout.activity_main)
@@ -29,24 +29,12 @@ public class AnimationComposeActivity extends RoboFragmentActivity implements Lo
     private static final String TAG = AnimationComposeActivity.class.getSimpleName();
     private static final int REQUEST_UPLOAD = 1;
 
-    @InjectView(R.id.image_animation_view)
-    private AnimationView mAnimationView;
-
-    @InjectView(R.id.button_post)
-    private Button mPostButton;
-
-    @InjectView(R.id.button_close)
-    private Button mCloseButton;
-
-    @InjectView(R.id.seekbar_animation_speed)
-    private SeekBar mAnimationSpeedSeekBar;
-
-    @InjectView(R.id.edit_text_image_title)
-    private EditText mImageTitleEditText;
-
-    @Inject
-    private DailyMotionActivityHelper mActivityHelper;
-
+    @InjectView(R.id.image_animation_view) private AnimationView mAnimationView;
+    @InjectView(R.id.button_post) private Button mPostButton;
+    @InjectView(R.id.button_close) private Button mCloseButton;
+    @InjectView(R.id.seekbar_animation_speed) private SeekBar mAnimationSpeedSeekBar;
+    @InjectView(R.id.edit_text_image_title) private EditText mImageTitleEditText;
+    @Inject private RejaMotionActivityHelper mActivityHelper;
     private AnimationEntity mAnimationEntity;
     private ProgressDialog mProgressDialog;
 
@@ -91,7 +79,7 @@ public class AnimationComposeActivity extends RoboFragmentActivity implements Lo
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == DailyMotionActivityHelper.REQUEST_GALLERY && resultCode == RESULT_OK) {
+        if (requestCode == RejaMotionActivityHelper.REQUEST_GALLERY && resultCode == RESULT_OK) {
             mAnimationEntity = mActivityHelper.loadImageFromIntent(getIntent());
             if (mAnimationEntity.size() > 0) {
                 mAnimationView.setImageBitmap(mAnimationEntity.getBitmap(0));
@@ -108,7 +96,7 @@ public class AnimationComposeActivity extends RoboFragmentActivity implements Lo
 
             mAnimationEntity.setTitle(mImageTitleEditText.getText().toString());
             mAnimationEntity.setDelay(mAnimationView.getDelay());
-            return new DailyMotionApiClient(this, mAnimationEntity);
+            return new RejaMotionApiClient(this, mAnimationEntity);
         default:
             Log.v(TAG, "Can't create AsyncTaskLoader. Undefined id: " + id);
             return null;

@@ -23,9 +23,9 @@ import com.rejasupotaro.rejamotionapp.R;
 import com.rejasupotaro.rejamotionapp.model.AnimationEntity;
 import com.rejasupotaro.rejamotionapp.utils.CloseableUtils;
 
-public class DailyMotionActivityHelper extends AbstractActivityHelper {
+public class RejaMotionActivityHelper extends AbstractActivityHelper {
 
-    private static final String TAG = DailyMotionActivityHelper.class.getSimpleName();
+    private static final String TAG = RejaMotionActivityHelper.class.getSimpleName();
     private static final String EXTRA_STREAM = "android.intent.extra.STREAM";
     private static final int DEFAULT_MAX_IMAGE_SIZE = 600;
     public static final int REQUEST_GALLERY = 0;
