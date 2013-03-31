@@ -3,8 +3,11 @@ class ImagesController < ApplicationController
   include ImagesHelper
 
   def index
-    #@image_list = Image.find(:all, :order => 'created_at, id desc', :limit => 6)
-    @image_list = Image.find(:all).sample(6)
+    if params[:order] == "latest"
+      @image_list = Image.find(:all, :order => 'created_at, id desc', :limit => 6)
+    else
+      @image_list = Image.find(:all).sample(6)
+    end
     @image_text = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit."
 
     render 'images/index'

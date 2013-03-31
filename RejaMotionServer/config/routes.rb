@@ -7,6 +7,7 @@ RejaMotionServer::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
   root :to => 'images#index'
   match 'images/index' => 'images#index'
+  match 'images/index/:order' => 'images#index'
   match 'images/show/:id' => 'images#show'
   match 'api/upload' => 'images#upload'
 
