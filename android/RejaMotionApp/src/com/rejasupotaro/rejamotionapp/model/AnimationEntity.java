@@ -10,7 +10,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 public class AnimationEntity {
-    private String mTitle = "かわ�?��GIF";
+    private String mTitle = "かわいみGIF";
     private List<Uri> mUriList;
     private List<Bitmap> mBitmapList;
     private int mDelay;
@@ -23,7 +23,7 @@ public class AnimationEntity {
     public void setTitle(String title) {
         mTitle = title;
     }
-    
+
     public String getTitle() {
         return mTitle;
     }
@@ -31,7 +31,7 @@ public class AnimationEntity {
     public void setDelay(int delay) {
         mDelay = delay;
     }
-    
+
     public int getDelay() {
         return mDelay;
     }

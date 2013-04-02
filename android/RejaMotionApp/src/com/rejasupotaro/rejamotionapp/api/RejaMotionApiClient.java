@@ -258,7 +258,6 @@ public class RejaMotionApiClient extends AsyncTaskLoader<Boolean> {
         }
     }
 
-
     @Override
     protected void onStartLoading() {
         if (mResult != null) {
