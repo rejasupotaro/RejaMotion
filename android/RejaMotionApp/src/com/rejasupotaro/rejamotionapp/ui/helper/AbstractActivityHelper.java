@@ -1,9 +1,9 @@
 package com.rejasupotaro.rejamotionapp.ui.helper;
 
+import javax.inject.Inject;
+
 import android.app.Activity;
 import android.content.Context;
-
-import com.google.inject.Inject;
 
 public class AbstractActivityHelper {
 

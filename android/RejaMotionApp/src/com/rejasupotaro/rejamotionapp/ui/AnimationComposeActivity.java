@@ -1,8 +1,8 @@
 package com.rejasupotaro.rejamotionapp.ui;
 
-import roboguice.activity.RoboFragmentActivity;
-import roboguice.inject.ContentView;
-import roboguice.inject.InjectView;
+import javax.inject.Inject;
+
+import proton.inject.activity.ProtonFragmentActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,31 +16,31 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-import com.google.inject.Inject;
 import com.rejasupotaro.rejamotionapp.R;
 import com.rejasupotaro.rejamotionapp.api.RejaMotionApiClient;
 import com.rejasupotaro.rejamotionapp.model.AnimationEntity;
 import com.rejasupotaro.rejamotionapp.ui.helper.RejaMotionActivityHelper;
 import com.rejasupotaro.rejamotionapp.utils.ToastUtils;
 
-@ContentView(R.layout.activity_main)
-public class AnimationComposeActivity extends RoboFragmentActivity implements LoaderCallbacks<Boolean> {
+public class AnimationComposeActivity extends ProtonFragmentActivity implements LoaderCallbacks<Boolean> {
 
     private static final String TAG = AnimationComposeActivity.class.getSimpleName();
     private static final int REQUEST_UPLOAD = 1;
 
-    @InjectView(R.id.image_animation_view) private AnimationView mAnimationView;
-    @InjectView(R.id.button_post) private Button mPostButton;
-    @InjectView(R.id.button_close) private Button mCloseButton;
-    @InjectView(R.id.seekbar_animation_speed) private SeekBar mAnimationSpeedSeekBar;
-    @InjectView(R.id.edit_text_image_title) private EditText mImageTitleEditText;
-    @Inject private RejaMotionActivityHelper mActivityHelper;
+    private AnimationView mAnimationView;
+    private Button mPostButton;
+    private Button mCloseButton;
+    private SeekBar mAnimationSpeedSeekBar;
+    private EditText mImageTitleEditText;
+    @Inject RejaMotionActivityHelper mActivityHelper;
     private AnimationEntity mAnimationEntity;
     private ProgressDialog mProgressDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        getVeiws();
 
         mAnimationView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -77,6 +77,14 @@ public class AnimationComposeActivity extends RoboFragmentActivity implements Lo
         }
     }
 
+    private void getVeiws() {
+        mAnimationView = (AnimationView) findViewById(R.id.image_animation_view);
+        mPostButton = (Button) findViewById(R.id.button_post);
+        mCloseButton = (Button) findViewById(R.id.button_close);
+        mAnimationSpeedSeekBar = (SeekBar) findViewById(R.id.seekbar_animation_speed);
+        mImageTitleEditText = (EditText) findViewById(R.id.edit_text_image_title);
+    }
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == RejaMotionActivityHelper.REQUEST_GALLERY && resultCode == RESULT_OK) {

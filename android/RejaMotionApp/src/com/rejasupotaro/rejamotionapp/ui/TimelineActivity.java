@@ -1,11 +1,11 @@
 package com.rejasupotaro.rejamotionapp.ui;
 
+import javax.inject.Inject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import roboguice.activity.RoboActivity;
-import roboguice.inject.ContentView;
-import roboguice.inject.InjectView;
+import proton.inject.activity.ProtonActivity;
 import android.graphics.Bitmap;
 import android.graphics.Picture;
 import android.net.Uri;
@@ -23,7 +23,6 @@ import android.webkit.WebView.PictureListener;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.google.inject.Inject;
 import com.rejasupotaro.rejamotionapp.Constants;
 import com.rejasupotaro.rejamotionapp.JavaScriptInterface;
 import com.rejasupotaro.rejamotionapp.R;
@@ -31,12 +30,11 @@ import com.rejasupotaro.rejamotionapp.ui.helper.RejaMotionActivityHelper;
 import com.rejasupotaro.rejamotionapp.utils.ToastUtils;
 import com.rejasupotaro.rejamotionapp.utils.UriUtils;
 
-@ContentView(R.layout.activity_timeline)
-public class TimelineActivity extends RoboActivity {
+public class TimelineActivity extends ProtonActivity {
     private static final String TAG = TimelineActivity.class.getSimpleName();
 
-    @InjectView(R.id.webview_timeline) private WebView mWebView;
-    @InjectView(R.id.progress_loading) private ProgressBar mProgressLoading;
+    private WebView mWebView;
+    private ProgressBar mProgressLoading;
     @Inject private RejaMotionActivityHelper mActivityHelper;
     private JavaScriptInterface mJavaScriptInterface;
 
@@ -63,6 +61,8 @@ public class TimelineActivity extends RoboActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_timeline);
+        getViews();
 
         mWebView.getSettings().setJavaScriptEnabled(true);
         setupWebViewClient(mWebView);
@@ -72,6 +72,11 @@ public class TimelineActivity extends RoboActivity {
         mJavaScriptInterface = new JavaScriptInterface(mWebView, mJavaScriptInterfaceReceiver);
 
         mActivityHelper.setupSplashAnimation(new Handler());
+    }
+    
+    private void getViews() {
+        mWebView = (WebView) findViewById(R.id.webview_timeline);
+        mProgressLoading = (ProgressBar) findViewById(R.id.progress_loading);
     }
 
     private void setupWebViewCache(WebView webView) {
