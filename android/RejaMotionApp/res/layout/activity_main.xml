@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/logo_dailymotion" />
 
-    <com.rejasupotaro.dailymotion.ui.AnimationView
+    <com.rejasupotaro.rejamotionapp.ui.AnimationView
         style="@style/common_frame"
         android:id="@+id/image_animation_view"
         android:layout_width="match_parent"

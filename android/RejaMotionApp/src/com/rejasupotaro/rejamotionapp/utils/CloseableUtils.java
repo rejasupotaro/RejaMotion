@@ -13,7 +13,7 @@ public class CloseableUtils {
         try {
             closeable.close();
         } catch (IOException e) {
-            Log.e(TAG, "An error occurred in DailyMotionpUtils.close()", e);
+            Log.e(TAG, "An error occurred in CloseableUtils.close()", e);
         }
     }
 }
