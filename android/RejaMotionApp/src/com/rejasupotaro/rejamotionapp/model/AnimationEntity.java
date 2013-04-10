@@ -10,7 +10,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 public class AnimationEntity {
-    private String mTitle = "かわいみGIF";
+    private String mTitle = "";
     private List<Uri> mUriList;
     private List<Bitmap> mBitmapList;
     private int mDelay;
