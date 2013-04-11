@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
 
   def index
     if params[:order] == "latest"
-      @image_list = Image.find(:all, :order => 'created_at, id desc', :limit => 6)
+      @image_list = Image.find(:all, :order => 'created_at desc, id desc', :limit => 6)
     else
       @image_list = Image.find(:all).sample(6)
     end
