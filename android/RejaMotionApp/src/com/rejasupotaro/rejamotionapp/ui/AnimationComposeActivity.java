@@ -41,7 +41,18 @@ public class AnimationComposeActivity extends ProtonFragmentActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getVeiws();
+        setComponentListeners();
+    }
 
+    private void getVeiws() {
+        mAnimationView = (AnimationView) findViewById(R.id.image_animation_view);
+        mPostButton = (Button) findViewById(R.id.button_post);
+        mCloseButton = (Button) findViewById(R.id.button_close);
+        mAnimationSpeedSeekBar = (SeekBar) findViewById(R.id.seekbar_animation_speed);
+        mImageTitleEditText = (EditText) findViewById(R.id.edit_text_image_title);
+    }
+
+    private void setComponentListeners() {
         mAnimationView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (mAnimationEntity.size() == 0) {
@@ -77,14 +88,6 @@ public class AnimationComposeActivity extends ProtonFragmentActivity implements 
         }
     }
 
-    private void getVeiws() {
-        mAnimationView = (AnimationView) findViewById(R.id.image_animation_view);
-        mPostButton = (Button) findViewById(R.id.button_post);
-        mCloseButton = (Button) findViewById(R.id.button_close);
-        mAnimationSpeedSeekBar = (SeekBar) findViewById(R.id.seekbar_animation_speed);
-        mImageTitleEditText = (EditText) findViewById(R.id.edit_text_image_title);
-    }
-    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == RejaMotionActivityHelper.REQUEST_GALLERY && resultCode == RESULT_OK) {
