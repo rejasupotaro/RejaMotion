@@ -3,12 +3,8 @@ package com.rejasupotaro.rejamotionapp.ui;
 import javax.inject.Inject;
 
 import proton.inject.activity.ProtonFragmentActivity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -17,16 +13,11 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.rejasupotaro.rejamotionapp.R;
-import com.rejasupotaro.rejamotionapp.api.RejaMotionApiClient;
 import com.rejasupotaro.rejamotionapp.model.AnimationEntity;
+import com.rejasupotaro.rejamotionapp.service.ImageUploaderService;
 import com.rejasupotaro.rejamotionapp.ui.helper.RejaMotionActivityHelper;
-import com.rejasupotaro.rejamotionapp.utils.ToastUtils;
 
-public class AnimationComposeActivity extends ProtonFragmentActivity implements LoaderCallbacks<Boolean> {
-
-    private static final String TAG = AnimationComposeActivity.class.getSimpleName();
-    private static final int REQUEST_UPLOAD = 1;
-
+public class AnimationComposeActivity extends ProtonFragmentActivity {
     private AnimationView mAnimationView;
     private Button mPostButton;
     private Button mCloseButton;
@@ -34,7 +25,6 @@ public class AnimationComposeActivity extends ProtonFragmentActivity implements 
     private EditText mImageTitleEditText;
     @Inject RejaMotionActivityHelper mActivityHelper;
     private AnimationEntity mAnimationEntity;
-    private ProgressDialog mProgressDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,8 +53,7 @@ public class AnimationComposeActivity extends ProtonFragmentActivity implements 
 
         mPostButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                getSupportLoaderManager().initLoader(
-                        REQUEST_UPLOAD, null, AnimationComposeActivity.this);
+                upload();
             }
         });
 
@@ -88,6 +77,14 @@ public class AnimationComposeActivity extends ProtonFragmentActivity implements 
         }
     }
 
+    private void upload() {
+        Intent intent = new Intent(this, ImageUploaderService.class);
+        mAnimationEntity.setTitle(mImageTitleEditText.getText().toString());
+        mAnimationEntity.setDelay(mAnimationView.getDelay());
+        intent.putExtra(ImageUploaderService.EXTRA_ANIMATION_ENTITY, mAnimationEntity);
+        startService(intent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == RejaMotionActivityHelper.REQUEST_GALLERY && resultCode == RESULT_OK) {
@@ -95,39 +92,6 @@ public class AnimationComposeActivity extends ProtonFragmentActivity implements 
             if (mAnimationEntity.size() > 0) {
                 mAnimationView.setImageBitmap(mAnimationEntity.getBitmap(0));
             }
-        }
-    }
-
-    public Loader<Boolean> onCreateLoader(int id, Bundle args) {
-        switch (id) {
-        case REQUEST_UPLOAD:
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage(getString(R.string.progress_uploading));
-            mProgressDialog.show();
-
-            mAnimationEntity.setTitle(mImageTitleEditText.getText().toString());
-            mAnimationEntity.setDelay(mAnimationView.getDelay());
-            return new RejaMotionApiClient(this, mAnimationEntity);
-        default:
-            Log.v(TAG, "Can't create AsyncTaskLoader. Undefined id: " + id);
-            return null;
-        }
-    }
-
-    public void onLoaderReset(Loader<Boolean> loader) {
-    }
-
-    public void onLoadFinished(Loader<Boolean> loader, Boolean result) {
-        if(mProgressDialog != null && mProgressDialog.isShowing()){
-            mProgressDialog.dismiss();
-        }
-        mProgressDialog = null;
-
-        if (result) {
-            ToastUtils.show(this, R.string.upload_completed);
-            getSupportLoaderManager().destroyLoader(loader.getId());
-        } else {
-            ToastUtils.show(this, R.string.upload_failed);
         }
     }
 

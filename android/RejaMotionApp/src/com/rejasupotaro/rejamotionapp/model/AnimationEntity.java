@@ -8,8 +8,10 @@ import org.apache.http.entity.mime.content.FileBody;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class AnimationEntity {
+public class AnimationEntity implements Parcelable {
     private String mTitle = "";
     private List<Uri> mUriList;
     private List<Bitmap> mBitmapList;
@@ -67,5 +69,38 @@ public class AnimationEntity {
         }
 
         return fileBodyList;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mTitle);
+        dest.writeList(mUriList);
+        //dest.writeList(mBitmapList);
+        dest.writeInt(mDelay);
+    }
+
+    public static final Parcelable.Creator<AnimationEntity> CREATOR = new Parcelable.Creator<AnimationEntity>() {
+        @Override
+        public AnimationEntity createFromParcel(Parcel source) {
+            return new AnimationEntity(source);
+        }
+
+        @Override
+        public AnimationEntity[] newArray(int size) {
+            return new AnimationEntity[size];
+        }
+    };
+
+    private AnimationEntity(Parcel source) {
+        mTitle = source.readString();
+        mUriList = new ArrayList<Uri>();
+        source.readList(mUriList, null);
+        //source.readList(mBitmapList, null);
+        mDelay = source.readInt();
     }
 }

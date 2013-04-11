@@ -44,6 +44,7 @@
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
+        <service android:name=".service.ImageUploaderService"></service>
     </application>
 
 </manifest>

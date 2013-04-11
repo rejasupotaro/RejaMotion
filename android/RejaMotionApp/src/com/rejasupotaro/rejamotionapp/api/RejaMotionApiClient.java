@@ -38,14 +38,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 import com.rejasupotaro.rejamotionapp.Constants;
 import com.rejasupotaro.rejamotionapp.model.AnimationEntity;
 import com.rejasupotaro.rejamotionapp.utils.CloseableUtils;
 
-public class RejaMotionApiClient extends AsyncTaskLoader<Boolean> {
+public class RejaMotionApiClient {
 
     private static final String TAG = RejaMotionApiClient.class.getSimpleName();
     public static final String UPLOAD_IMAGE_TITLE = "image_title";
@@ -63,16 +62,12 @@ public class RejaMotionApiClient extends AsyncTaskLoader<Boolean> {
     private HttpClient mHttpClient;
     private AnimationEntity mAnimationEntity;
     private String mResponseMessage;
-    private Boolean mResult; // http://www.docjar.org/html/api/org/apache/commons/httpclient/TestStatusLine.java.html
 
     public RejaMotionApiClient(Context context) {
-        super(context);
         mHttpClient = new DefaultHttpClient();
     }
 
     public RejaMotionApiClient(Context context, AnimationEntity animationEntity) {
-        super(context);
-
         if (context == null || animationEntity == null) {
             throw new IllegalArgumentException();
         }
@@ -83,12 +78,10 @@ public class RejaMotionApiClient extends AsyncTaskLoader<Boolean> {
     }
 
     public RejaMotionApiClient(Context context, HttpClient httpClient) {
-        super(context);
         mHttpClient = httpClient;
     }
 
-    @Override
-    public Boolean loadInBackground() {
+    public Boolean execute() {
         File zipFile = toZip(mContext.getExternalCacheDir().getPath() + "/out.zip", mAnimationEntity.getUriList());
 
         try {
@@ -241,42 +234,5 @@ public class RejaMotionApiClient extends AsyncTaskLoader<Boolean> {
             if (cursor != null) cursor.close();
         }
         return path;
-    }
-
-    @Override
-    public void deliverResult(Boolean result) {
-        if (isReset()) {
-            if (mResult != null) {
-                mResult = null;
-            }
-            return;
-        }
-
-        mResult = result;
-        if (isStarted()) {
-            super.deliverResult(result);
-        }
-    }
-
-    @Override
-    protected void onStartLoading() {
-        if (mResult != null) {
-            deliverResult(mResult);
-        }
-        if (takeContentChanged() || mResult == null) {
-            forceLoad();
-        }
-    }
-
-    @Override
-    protected void onStopLoading() {
-        super.onStopLoading();
-        cancelLoad();
-    }
-
-    @Override
-    protected void onReset() {
-        super.onReset();
-        onStopLoading();
     }
 }
