@@ -10,5 +10,4 @@ public class RejaMotionApplication extends Application {
         super.onCreate();
         Proton.initialize(this, new RejaMotionModule());
     }
-
 }

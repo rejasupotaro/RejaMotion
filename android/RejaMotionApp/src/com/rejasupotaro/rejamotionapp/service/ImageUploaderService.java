@@ -6,7 +6,9 @@ import proton.inject.service.ProtonIntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import com.rejasupotaro.rejamotionapp.BusProvider;
 import com.rejasupotaro.rejamotionapp.api.RejaMotionApiClient;
+import com.rejasupotaro.rejamotionapp.event.UploadFinishedEvent;
 import com.rejasupotaro.rejamotionapp.model.AnimationEntity;
 import com.rejasupotaro.rejamotionapp.notification.RejaMotionNotificationManager;
 
@@ -32,6 +34,7 @@ public class ImageUploaderService extends ProtonIntentService {
         boolean result = apiClient.execute();
         Log.d(TAG, "upload result: " + result);
         mNotificationManager.cancelNotification();
+        BusProvider.getInstance().post(new UploadFinishedEvent());
     }
 
 }

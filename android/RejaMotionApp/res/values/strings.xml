@@ -13,7 +13,7 @@
 
     <!-- file upload -->
     <string name="progress_uploading">Now Uploading...</string>
-    <string name="upload_completed">アップロード完了</string>
+    <string name="upload_finished">アップロード完了</string>
     <string name="upload_failed">アップロードに失敗しました</string>
     <string name="button_text_post">POST</string>
 

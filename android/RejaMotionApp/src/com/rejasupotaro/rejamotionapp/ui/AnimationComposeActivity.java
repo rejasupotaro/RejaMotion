@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import proton.inject.activity.ProtonFragmentActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -12,12 +13,17 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
+import com.rejasupotaro.rejamotionapp.BusProvider;
 import com.rejasupotaro.rejamotionapp.R;
+import com.rejasupotaro.rejamotionapp.event.UploadFinishedEvent;
 import com.rejasupotaro.rejamotionapp.model.AnimationEntity;
 import com.rejasupotaro.rejamotionapp.service.ImageUploaderService;
 import com.rejasupotaro.rejamotionapp.ui.helper.RejaMotionActivityHelper;
+import com.rejasupotaro.rejamotionapp.utils.ToastUtils;
+import com.squareup.otto.Subscribe;
 
 public class AnimationComposeActivity extends ProtonFragmentActivity {
+    private Handler mHandler;
     private AnimationView mAnimationView;
     private Button mPostButton;
     private Button mCloseButton;
@@ -30,8 +36,21 @@ public class AnimationComposeActivity extends ProtonFragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mHandler = new Handler();
         getVeiws();
         setComponentListeners();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
     }
 
     private void getVeiws() {
@@ -99,5 +118,15 @@ public class AnimationComposeActivity extends ProtonFragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
+    }
+
+    @Subscribe
+    public void onUploadFinished(UploadFinishedEvent event) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                ToastUtils.show(AnimationComposeActivity.this, R.string.upload_finished);
+            }
+        });
     }
 }

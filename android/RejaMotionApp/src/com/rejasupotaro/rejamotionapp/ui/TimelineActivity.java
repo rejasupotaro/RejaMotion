@@ -73,7 +73,7 @@ public class TimelineActivity extends ProtonActivity {
 
         mActivityHelper.setupSplashAnimation(new Handler());
     }
-    
+
     private void getViews() {
         mWebView = (WebView) findViewById(R.id.webview_timeline);
         mProgressLoading = (ProgressBar) findViewById(R.id.progress_loading);
