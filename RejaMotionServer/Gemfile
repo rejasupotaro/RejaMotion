@@ -28,6 +28,7 @@ end
 
 gem 'jquery-rails'
 gem 'bootstrap-sass'
+gem 'chanko'
 gem 'zipruby'
 gem 'rspec-rails'
 

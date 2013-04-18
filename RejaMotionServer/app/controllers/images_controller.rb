@@ -1,8 +1,11 @@
 class ImagesController < ApplicationController
+  unit_action :admin_unit, :list
 
   include ImagesHelper
 
   def index
+    invoke(:admin_unit, :index)
+
     if params[:order] == "latest"
       @image_list = Image.find(:all, :order => 'created_at desc, id desc', :limit => 6)
     else
