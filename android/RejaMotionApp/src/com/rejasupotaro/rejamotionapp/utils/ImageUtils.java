@@ -17,10 +17,10 @@ public class ImageUtils {
         final float heightScaleRatio = reqHeight / (float) imageHeight;
         final float scaleRatio = Math.min(widthScaleRatio, heightScaleRatio);
         final Matrix matrix = new Matrix();
-        matrix.postRotate(scaleRatio);
+        matrix.postScale(scaleRatio, scaleRatio);
 
         if (!matrix.isIdentity()) {
-            return bitmap.createBitmap(bitmap, 0, 0, imageWidth, imageHeight, matrix, true);
+            return Bitmap.createBitmap(bitmap, 0, 0, imageWidth, imageHeight, matrix, true);
         } else {
             return bitmap;
         }
