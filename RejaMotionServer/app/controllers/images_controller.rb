@@ -6,11 +6,16 @@ class ImagesController < ApplicationController
   def index
     invoke(:admin_unit, :index)
 
-    if params[:order] == "latest"
-      @image_list = Image.find(:all, :order => 'created_at desc, id desc', :limit => 6)
-    else
-      @image_list = Image.find(:all).sample(6)
+    page = params[:p].present? ? params[:p].to_i : 1
+    if page <= 0
+      redirect_to :action => "index"
+      return
     end
+
+    offset = 6 * (page - 1)
+
+    @image_list = Image.find(:all, :offset => offset, :order => 'created_at desc, id desc', :limit => 6)
+
     @image_text = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit."
 
     render 'images/index'
