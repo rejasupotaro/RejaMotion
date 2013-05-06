@@ -8,7 +8,8 @@
           .center_horizontal
             != link_to image_tag(image.url), :controller => 'images', :action => 'show', :id => image.id
           .caption
-            %h3= image.title
+            .image_title= image.title
+            %hr
             %p= @image_text
         != p '</div>' if i.modulo(3) == 2 or i == @image_list.size
         - i += 1
