@@ -16,8 +16,6 @@ class ImagesController < ApplicationController
 
     @image_list = Image.find(:all, :offset => offset, :order => 'created_at desc, id desc', :limit => 6)
 
-    @image_text = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit."
-
     render 'images/index'
   end
 

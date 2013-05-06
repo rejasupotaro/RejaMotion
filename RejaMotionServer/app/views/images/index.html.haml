@@ -10,6 +10,6 @@
           .caption
             .image_title= image.title
             %hr
-            %p= @image_text
+            %p= image.text
         != p '</div>' if i.modulo(3) == 2 or i == @image_list.size
         - i += 1
