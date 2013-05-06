@@ -3,7 +3,7 @@
     %ui.thumbnails
       - i = 0
       - @image_list.each do |image|
-        != p '<div class="row-fluid margin_top">' if i.modulo(3) == 0
+        != p '<div class="row-fluid">' if i.modulo(3) == 0
         %li.span4.thumbnail
           .center_horizontal
             != link_to image_tag(image.url), :controller => 'images', :action => 'show', :id => image.id
