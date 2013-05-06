@@ -21,6 +21,7 @@ gen/
 ## Local configuration file (sdk path, etc)
 local.properties
 RemoteSystemsTempFiles
+.settings/
 
 # gitignore for rails
 *.rbc
