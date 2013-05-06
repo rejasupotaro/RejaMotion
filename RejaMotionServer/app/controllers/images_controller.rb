@@ -31,6 +31,10 @@ class ImagesController < ApplicationController
     end
   end
 
+  def create
+    upload
+  end
+
   def upload
     image_title = params[:image_title]
     image_url = '/images/' + generate_image_file_name
