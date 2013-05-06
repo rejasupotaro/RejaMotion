@@ -13,3 +13,6 @@
             %p= image.text
         != p '</div>' if i.modulo(3) == 2 or i == @image_list.size
         - i += 1
+    #page-nav.center_horizontal
+      != link_to 'prev', :controller => 'images', :action => 'index', :p => @page - 1 if @page >= 2
+      != link_to 'next', :controller => 'images', :action => 'index', :p => @page + 1

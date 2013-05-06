@@ -6,13 +6,13 @@ class ImagesController < ApplicationController
   def index
     invoke(:admin_unit, :index)
 
-    page = params[:p].present? ? params[:p].to_i : 1
-    if page <= 0
+    @page = params[:p].present? ? params[:p].to_i : 1
+    if @page <= 0
       redirect_to :action => "index"
       return
     end
 
-    offset = 6 * (page - 1)
+    offset = 6 * (@page - 1)
 
     @image_list = Image.find(:all, :offset => offset, :order => 'created_at desc, id desc', :limit => 6)
 
