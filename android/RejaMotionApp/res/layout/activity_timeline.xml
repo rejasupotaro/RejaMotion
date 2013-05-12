@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbarStyle="insideOverlay"
-            hybridge:allowingDomains="rejamotion.com rejasupotaro.com" />
+            hybridge:allowingDomains="rejamotion.com 192.168.3.2" />
 
         <FrameLayout
             android:id="@+id/view_splash"

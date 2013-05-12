@@ -2,6 +2,9 @@ package com.rejasupotaro.rejamotionapp.ui;
 
 import javax.inject.Inject;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import proton.inject.activity.ProtonActivity;
 import android.graphics.Bitmap;
 import android.graphics.Picture;
@@ -18,7 +21,9 @@ import android.webkit.WebView;
 import android.webkit.WebView.PictureListener;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.rejasupotaro.hybridge.BuildConfig;
 import com.rejasupotaro.hybridge.HybridgeWebView;
 import com.rejasupotaro.hybridge.annotation.Bridge;
 import com.rejasupotaro.rejamotionapp.Constants;
@@ -39,6 +44,7 @@ public class TimelineActivity extends ProtonActivity {
         getViews();
 
         mWebView.init(this);
+        if (BuildConfig.DEBUG) mWebView.clearCache(true);
         setupWebViewClient(mWebView);
         mWebView.loadUrl(Constants.APP_SITE_URL);
 
@@ -111,8 +117,12 @@ public class TimelineActivity extends ProtonActivity {
         return true;
     }
 
-    @Bridge("system.log")
-    public void log() {
-        Log.d("DEBUG", "system.log");
+    @Bridge("system.toast.show")
+    public void log(JSONObject params) {
+        try {
+            Toast.makeText(this, params.getString("message"), Toast.LENGTH_SHORT).show();
+        } catch (JSONException e) {
+            Log.e("DEBUG", e.getMessage(), e);
+        }
     }
 }
