@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:hybridge="http://schemas.android.com/apk/res/com.rejasupotaro.rejamotionapp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -22,11 +23,12 @@
             android:layout_gravity="center"
             android:indeterminate="false" />
 
-        <WebView
+        <com.rejasupotaro.hybridge.HybridgeWebView
             android:id="@+id/webview_timeline"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbarStyle="insideOverlay" />
+            android:scrollbarStyle="insideOverlay"
+            hybridge:allowingDomains="rejamotion.com rejasupotaro.com" />
 
         <FrameLayout
             android:id="@+id/view_splash"
