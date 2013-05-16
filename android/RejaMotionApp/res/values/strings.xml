@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">DailyMotion</string>
+    <string name="app_name">RejaMotion</string>
 
     <!-- menu -->
     <string name="menu_settings">Settings</string>

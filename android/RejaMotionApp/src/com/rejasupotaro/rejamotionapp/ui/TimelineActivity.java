@@ -24,8 +24,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.rejasupotaro.hybridge.BuildConfig;
-import com.rejasupotaro.hybridge.HybridgeWebView;
 import com.rejasupotaro.hybridge.annotation.Bridge;
+import com.rejasupotaro.hybridge.bridge.HybridgeWebView;
 import com.rejasupotaro.rejamotionapp.Constants;
 import com.rejasupotaro.rejamotionapp.R;
 import com.rejasupotaro.rejamotionapp.ui.helper.RejaMotionActivityHelper;
