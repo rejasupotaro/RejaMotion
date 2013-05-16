@@ -23,12 +23,12 @@
             android:layout_gravity="center"
             android:indeterminate="false" />
 
-        <com.rejasupotaro.hybridge.bridge.HybridgeWebView
+        <com.rejasupotaro.rejamotionapp.ui.RejaMotionWebView
             android:id="@+id/webview_timeline"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbarStyle="insideOverlay"
-            hybridge:allowingDomains="rejamotion.com rejasupotaro.com 192.168.3.2" />
+            hybridge:allowingDomains="rejamotion.com 192.168.3.2" />
 
         <FrameLayout
             android:id="@+id/view_splash"
