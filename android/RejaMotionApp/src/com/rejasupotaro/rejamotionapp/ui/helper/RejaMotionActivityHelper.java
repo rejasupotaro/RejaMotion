@@ -10,16 +10,10 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Handler;
 import android.provider.MediaStore.Images.Media;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.rejasupotaro.rejamotionapp.R;
 import com.rejasupotaro.rejamotionapp.model.AnimationEntity;
 import com.rejasupotaro.rejamotionapp.utils.CloseableUtils;
 
@@ -27,7 +21,6 @@ public class RejaMotionActivityHelper extends AbstractActivityHelper {
 
     private static final String TAG = RejaMotionActivityHelper.class.getSimpleName();
     private static final String EXTRA_STREAM = "android.intent.extra.STREAM";
-    private static final int DEFAULT_MAX_IMAGE_SIZE = 600;
     public static final int REQUEST_GALLERY = 0;
 
     public void launchGallarey() {
@@ -37,10 +30,11 @@ public class RejaMotionActivityHelper extends AbstractActivityHelper {
         getActivity().startActivityForResult(intent, REQUEST_GALLERY);
     }
 
-    public void launchActivity(Class targetClass) {
+    public void launchActivity(Class<?> targetClass) {
         getActivity().startActivity(new Intent(getActivity(), targetClass));
     }
 
+    @SuppressWarnings("unchecked")
     public AnimationEntity loadImageFromIntent(Intent intent) {
         AnimationEntity animationImageList = new AnimationEntity();
         if (intent == null) return animationImageList;
@@ -81,49 +75,5 @@ public class RejaMotionActivityHelper extends AbstractActivityHelper {
         }
 
         return animationImageList;
-    }
-
-    public void setupSplashAnimation(final Handler handler) {
-        new Thread(new Runnable() {
-            private static final int START_ANIMATION = 1000;
-            private static final int RUN_INTERVAL = 50;
-            private static final int FONT_COLOR_DEPTH = 120;
-
-            private int tick = 0;
-            private int transparent = 255;
-            private View splashView = getActivity().findViewById(R.id.view_splash);
-            private ImageView splashImageView = (ImageView) getActivity().findViewById(R.id.view_splash_image);
-            private TextView splashTextView = (TextView) getActivity().findViewById(R.id.view_splash_text);
-
-            public void run() {
-                while (transparent >= 0) {
-                    try {
-                        Thread.sleep(RUN_INTERVAL);
-                    } catch (InterruptedException e) {
-                        Log.v(TAG, "Something wrong with TimelineActivity", e);
-                    }
-
-                    if (tick >= START_ANIMATION) {
-                        handler.post(new Runnable() {
-                            public void run() {
-                                transparent -= 18;
-
-                                splashView.setBackgroundColor(Color.argb(transparent, 255, 255, 255));
-                                splashImageView.setAlpha(transparent);
-                                splashTextView.setTextColor(
-                                        Color.argb(transparent, FONT_COLOR_DEPTH, FONT_COLOR_DEPTH, FONT_COLOR_DEPTH));
-
-                                if (transparent <= 0) {
-                                    splashView.setVisibility(View.GONE);
-                                    splashImageView.setVisibility(View.GONE);
-                                    splashTextView.setVisibility(View.GONE);
-                                }
-                            }
-                        });
-                    }
-                    tick += RUN_INTERVAL;
-                }
-            }
-        }).start();
     }
 }

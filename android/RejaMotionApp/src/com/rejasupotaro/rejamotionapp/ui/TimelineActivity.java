@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import proton.inject.activity.ProtonActivity;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -28,8 +28,6 @@ public class TimelineActivity extends ProtonActivity implements LoadStateListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
         initViews();
-
-        mActivityHelper.setupSplashAnimation(new Handler());
     }
 
     private void initViews() {
@@ -66,5 +64,13 @@ public class TimelineActivity extends ProtonActivity implements LoadStateListene
             }
         });
         return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mWebView.browserBack()) return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
