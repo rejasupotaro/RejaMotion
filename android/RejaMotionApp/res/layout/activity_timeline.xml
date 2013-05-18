@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbarStyle="insideOverlay"
-            hybridge:validDomains="rejamotion.com 192.168.3.2 www.google.co.jp www.nicovideo.jp cookpad.com" />
+            hybridge:validDomains="rejamotion.com 192.168.3.2" />
     </FrameLayout>
 
 </LinearLayout>

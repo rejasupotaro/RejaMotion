@@ -37,7 +37,7 @@ public class RejaMotionWebView extends HybridgeWebView {
 
         this.activity = activity;
         this.listener = listener;
-        super.registerBridge(this);
+        registerBridge(this);
         setupWebViewClient();
     }
 

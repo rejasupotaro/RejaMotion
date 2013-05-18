@@ -1,10 +1,8 @@
 try
-  requestJson = {
-    'id': '1',
-    'dest': 'system.toast.show',
-    'params': { 'message': 'message from js' }
-  }
-  Device.notifyToDevice(JSON.stringify(requestJson))
+  hybridge.call(
+      'system.toast.show',
+      {'message': 'message from js'},
+      (result) -> alert(result.message))
 catch referenceError
   console.log(referenceError);
 

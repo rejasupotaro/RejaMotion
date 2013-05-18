@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.rejasupotaro.hybridge.BuildConfig;
-import com.rejasupotaro.rejamotionapp.Constants;
 import com.rejasupotaro.rejamotionapp.R;
 import com.rejasupotaro.rejamotionapp.ui.RejaMotionWebView.LoadStateListener;
 import com.rejasupotaro.rejamotionapp.ui.helper.RejaMotionActivityHelper;
@@ -34,7 +33,7 @@ public class TimelineActivity extends ProtonActivity implements LoadStateListene
         mWebView = (RejaMotionWebView) findViewById(R.id.webview_timeline);
         mWebView.init(this, this);
         if (BuildConfig.DEBUG) mWebView.clearCache(true);
-        mWebView.loadUrl(Constants.APP_SITE_URL);
+        mWebView.loadUrl("http://192.168.3.2:3000/?p=10");//(Constants.APP_SITE_URL);
 
         mProgressLoading = (ProgressBar) findViewById(R.id.progress_loading);
     }
